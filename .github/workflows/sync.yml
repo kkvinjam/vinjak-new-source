@@ -1,0 +1,21 @@
+name: Sync Repositories
+
+on:
+  push:
+    branches:
+      - main  # Adjust this to the branch you want to trigger the sync
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Push Changes to Second Repository
+      run: |
+        cd $GITHUB_WORKSPACE
+        git remote add second-repo https://github.com/kkvinjam/vinjak-new-destination.git
+        git push second-repo HEAD:main
+
